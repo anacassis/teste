@@ -1,0 +1,30 @@
+(texto as text) =>
+
+
+let
+    Fonte = Web.BrowserContents("https://translate.google.com/?hl=pt-BR&sl=en&tl=pt&text=translate"&texto),
+    #"Tabela extraída de HTML" = Html.Table(Fonte, {{"Coluna 1", ".text-wrap"}}),
+    #"Tipo Alterado" = Table.TransformColumnTypes(#"Tabela extraída de HTML",{{"Coluna 1", type text}})
+in
+    #"Tipo Alterado"
+
+
+let
+    Fonte = Web.BrowserContents("https://translate.google.com/?hl=pt-BR&sl=en&tl=pt&text=Hello&op=translate"),
+    #"Tabela extraída de HTML" = Html.Table(Fonte, {{"Coluna 1", ".S18kfe:nth-child(2)"}}),
+
+
+prompt - conda activate envpowerbi
+
+
+import our translation libray 
+from textblob import TextBlob
+
+def translation(text):
+	blob = TextBlob(text)
+	return str(blob.translate(from_lang ='en-US', to='pt-BR'))
+
+dataset['translation']=dataset['name'].apply(translation)
+
+
+
